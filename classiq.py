@@ -3,7 +3,7 @@ from head import *
 class Character(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
-        self.surf = idleSheet.subsurface((0,0,120*2,80*2))
+        self.surf = idleSheet.subsurface((0,0,idleSheet.get_width()/10,idleSheet.get_height()))
         self.rect = self.surf.get_rect()
    
         self.spawn = vec((0,0))
@@ -17,7 +17,7 @@ class Character(pygame.sprite.Sprite):
 
         self.index_frame = 0 #that keeps track on the current index of the image list.
         self.current_frame = 0 #that keeps track on the current time or current frame since last the index switched.
-        self.animation_frames = 5 #that define how many seconds or frames should pass before switching image.
+        self.animation_frames = 6 #that define how many seconds or frames should pass before switching image.
         
     def update(self):
         self.checkCollisions()
@@ -42,6 +42,7 @@ class Character(pygame.sprite.Sprite):
         if hits and not self.jumping:
            self.jumping = True
            self.vel.y = -15
+           self.index_frame = 0
  
     def cancel_jump(self):
         if self.jumping:
@@ -70,13 +71,27 @@ class Character(pygame.sprite.Sprite):
         self.droite = False
 
     def animate(self):
-        if self.droite :
-            self.surf = runSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
-        elif self.gauche:
-            self.surf = runSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
-            self.surf = pygame.transform.flip(self.surf, True, False)
+        if self.jumping :
+            self.jumpAnimation()
+        elif self.droite or self.gauche:
+            self.runAnimation()
         else :
-            self.surf = idleSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
+            self.idleAnimation()
+
+    def jumpAnimation(self):
+        self.surf = jumpSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
+
+        self.current_frame += 1
+        if self.current_frame >= self.animation_frames:
+            self.current_frame = 0
+            self.index_frame += 1
+            if self.index_frame >= 3 :
+                self.index_frame = 0  
+
+    def runAnimation(self):
+        self.surf = runSheet.subsurface((runSheet.get_width()/10*self.index_frame,0,runSheet.get_width()/10,runSheet.get_height()))
+        if self.gauche:
+            self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame += 1
         if self.current_frame >= self.animation_frames:
@@ -85,6 +100,15 @@ class Character(pygame.sprite.Sprite):
             if self.index_frame >= 10 :
                 self.index_frame = 0  
 
+    def idleAnimation(self):
+        self.surf = idleSheet.subsurface((idleSheet.get_width()/10*self.index_frame,0,idleSheet.get_width()/10,idleSheet.get_height()))
+
+        self.current_frame += 1
+        if self.current_frame >= self.animation_frames:
+            self.current_frame = 0
+            self.index_frame += 1
+            if self.index_frame >= 10 :
+                self.index_frame = 0  
 
 class Player(Character):
     def __init__(self):
