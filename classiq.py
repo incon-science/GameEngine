@@ -70,8 +70,11 @@ class Character(pygame.sprite.Sprite):
         self.droite = False
 
     def animate(self):
-        if self.gauche or self.droite:
+        if self.droite :
             self.surf = runSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
+        elif self.gauche:
+            self.surf = runSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
+            self.surf = pygame.transform.flip(self.surf, True, False)
         else :
             self.surf = idleSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
 
