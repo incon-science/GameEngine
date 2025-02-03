@@ -30,7 +30,7 @@ WIDTH = infoObject.current_w
 HEIGHT = infoObject.current_h
 
 charSheet = pygame.image.load("assets/AnimationSheet_Character.png").convert_alpha()
-charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*3,charSheet.get_height()*3))
+charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*4,charSheet.get_height()*4))
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()
