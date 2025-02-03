@@ -15,7 +15,7 @@ camera = pygame.math.Vector2((0, 0))
 vec = pygame.math.Vector2 #2 for two dimensional
 
 ACC = 0.5
-FRIC = -0.07#-0.12
+FRIC = -0.04#-0.12
 FPS = 60
 
 deadzone = 0.3#for joystick
@@ -29,14 +29,8 @@ infoObject = pygame.display.Info()
 WIDTH = infoObject.current_w
 HEIGHT = infoObject.current_h
 
-runSheet = pygame.image.load("assets/_Run.png").convert_alpha()
-runSheet = pygame.transform.scale(runSheet,(runSheet.get_width()*2,runSheet.get_height()*2))
-
-idleSheet = pygame.image.load("assets/_Idle.png").convert_alpha()
-idleSheet = pygame.transform.scale(idleSheet,(idleSheet.get_width()*2,idleSheet.get_height()*2))
-
-jumpSheet = pygame.image.load("assets/_Jump.png").convert_alpha()
-jumpSheet = pygame.transform.scale(jumpSheet,(jumpSheet.get_width()*2,jumpSheet.get_height()*2))
+charSheet = pygame.image.load("assets/AnimationSheet_Character.png").convert_alpha()
+charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*3,charSheet.get_height()*3))
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()
