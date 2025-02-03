@@ -6,33 +6,32 @@ class Character(pygame.sprite.Sprite):
         self.surf = charSheet.subsurface((0,0,charSheet.get_width()/8,charSheet.get_height()/9))
         self.rect = self.surf.get_rect()
    
-        self.spawn = vec((0,0))
-        self.pos = vec((0,0))
+        self.pos = vec((0, 0))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.jumping = False
 
-        self.gauche = False
-        self.droite = False
+        self.last_dir = 0
 
         self.index_frame = 0 #that keeps track on the current index of the image list.
         self.current_frame = 0 #that keeps track on the current time or current frame since last the index switched.
-        self.animation_frames = 4 #that define how many seconds or frames should pass before switching image.
         
-    def update(self):
-        self.checkCollisions()
-
+    def move(self):
         self.acc = vec(0,0.5)
+    
+        pressed_keys = pygame.key.get_pressed()
                 
-        if self.gauche:
+        if pressed_keys[K_LEFT] or pressed_keys[K_q] :
             self.acc.x = -ACC
-        if self.droite:
+            self.last_dir = -1
+        if pressed_keys[K_RIGHT] or pressed_keys[K_d] :
             self.acc.x = ACC
+            self.last_dir = 1
                  
         self.acc.x += self.vel.x * FRIC
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
-
+             
         self.rect.midbottom = self.pos
 
         self.animate()
@@ -59,21 +58,14 @@ class Character(pygame.sprite.Sprite):
                     self.jumping = False
 
     def respawn(self):
-        self.rect = self.surf.get_rect()
-   
-        self.spawn = vec((0,0))
         self.pos = vec((0,0))
         self.vel = vec(0,0)
-        self.acc = vec(0,0)
         self.jumping = False
-
-        self.gauche = False
-        self.droite = False
 
     def animate(self):
         if self.jumping :
             self.jumpAnimation()
-        elif self.droite or self.gauche:
+        elif self.acc.x != 0:
             self.runAnimation()
         else :
             self.idleAnimation()
@@ -82,7 +74,7 @@ class Character(pygame.sprite.Sprite):
         self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/9*5,charSheet.get_width()/8,charSheet.get_height()/9))
 
         self.current_frame += 1
-        if self.current_frame >= self.animation_frames:
+        if self.current_frame >= 6:
             self.current_frame = 0
             self.index_frame += 1
             if self.index_frame >= 8 :
@@ -90,11 +82,11 @@ class Character(pygame.sprite.Sprite):
 
     def runAnimation(self):
         self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/9*3,charSheet.get_width()/8,charSheet.get_height()/9))
-        if self.gauche:
+        if self.acc.x < 0:
             self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame += 1
-        if self.current_frame >= self.animation_frames:
+        if self.current_frame >= 4:
             self.current_frame = 0
             self.index_frame += 1
             if self.index_frame >= 8 :
@@ -102,9 +94,11 @@ class Character(pygame.sprite.Sprite):
 
     def idleAnimation(self):
         self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/9))
+        if self.last_dir < 0 :
+            self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame += 1
-        if self.current_frame >= self.animation_frames:
+        if self.current_frame >= 18:
             self.current_frame = 0
             self.index_frame += 1
             if self.index_frame >= 2 :
@@ -122,48 +116,31 @@ class Player(Character):
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-            if event.key == pygame.K_q or event.key == pygame.K_LEFT:
-                self.gauche = True
-            if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                self.droite = True  
             if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
                 self.jump()
         if event.type == pygame.KEYUP:   
-            if event.key == pygame.K_q or event.key == pygame.K_LEFT:
-                self.gauche = False
-            if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                self.droite = False 
             if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
                 self.cancel_jump()
 
+        '''
         if event.type == pygame.JOYBUTTONDOWN:      
-            if  event.button == 4:
-                self.gauche = True
-            if  event.button == 5:
-                self.droite = True  
             if  event.button == 0:
                 self.jump()
         if event.type == pygame.JOYBUTTONUP:      
-            if  event.button == 4:
-                self.gauche = False
-            if  event.button == 5:
-                self.droite = False 
             if  event.button == 0:
                 self.cancel_jump()
 
-        self.joystick()
-
-    def joystick(self):
         if pygame.joystick.get_count()>0:
             axis_pos = joysticks[0].get_axis(0)
 
             if axis_pos < -1 * deadzone:
-                self.gauche = True
+                self.vel.x = -VEL
+                self.last_dir = -1
             elif axis_pos > deadzone:
-                self.droite = True  
+                self.vel.x = VEL
+                self.last_dir = 1
             else:
-                self.gauche = False
-                self.droite = False          
+                self.vel.x = 0      '''  
  
 class Platform(pygame.sprite.Sprite):
     def __init__(self,size,pos):
@@ -172,5 +149,5 @@ class Platform(pygame.sprite.Sprite):
         self.surf.fill((255,255,255))
         self.rect = self.surf.get_rect(center = pos)
 
-    def update(self):
+    def move(self):
         pass
