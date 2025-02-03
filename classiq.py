@@ -76,7 +76,6 @@ class Character(pygame.sprite.Sprite):
         elif self.droite or self.gauche:
             self.runAnimation()
         else :
-            self.index_frame = 0
             self.idleAnimation()
 
     def jumpAnimation(self):
