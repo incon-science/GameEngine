@@ -1,9 +1,9 @@
 from head import *
 
-class Personnage(pygame.sprite.Sprite):
+class Character(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
-        self.surf = image_droite
+        self.surf = idleSheet.subsurface((0,0,120*2,80*2))
         self.rect = self.surf.get_rect()
    
         self.spawn = vec((0,0))
@@ -15,7 +15,13 @@ class Personnage(pygame.sprite.Sprite):
         self.gauche = False
         self.droite = False
 
-    def move(self):
+        self.index_frame = 0 #that keeps track on the current index of the image list.
+        self.current_frame = 0 #that keeps track on the current time or current frame since last the index switched.
+        self.animation_frames = 5 #that define how many seconds or frames should pass before switching image.
+        
+    def update(self):
+        self.checkCollisions()
+
         self.acc = vec(0,0.5)
                 
         if self.gauche:
@@ -28,6 +34,8 @@ class Personnage(pygame.sprite.Sprite):
         self.pos += self.vel + 0.5 * self.acc
 
         self.rect.midbottom = self.pos
+
+        self.animate()
  
     def jump(self): 
         hits = pygame.sprite.spritecollide(self, platforms, False)
@@ -40,7 +48,7 @@ class Personnage(pygame.sprite.Sprite):
             if self.vel.y < -3:
                 self.vel.y = -3
  
-    def update(self):
+    def checkCollisions(self):
         hits = pygame.sprite.spritecollide(self ,platforms, False)
         if self.vel.y > 0:        
             if hits:
@@ -49,7 +57,7 @@ class Personnage(pygame.sprite.Sprite):
                     self.vel.y = 0
                     self.jumping = False
 
-    def into_the_void(self):
+    def respawn(self):
         self.rect = self.surf.get_rect()
    
         self.spawn = vec((0,0))
@@ -61,7 +69,21 @@ class Personnage(pygame.sprite.Sprite):
         self.gauche = False
         self.droite = False
 
-class Player(Personnage):
+    def animate(self):
+        if self.gauche or self.droite:
+            self.surf = runSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
+        else :
+            self.surf = idleSheet.subsurface((120*2*self.index_frame,0,120*2,80*2))
+
+        self.current_frame += 1
+        if self.current_frame >= self.animation_frames:
+            self.current_frame = 0
+            self.index_frame += 1
+            if self.index_frame >= 10 :
+                self.index_frame = 0  
+
+
+class Player(Character):
     def __init__(self):
         super().__init__()  
 
@@ -102,10 +124,7 @@ class Player(Personnage):
             if  event.button == 0:
                 self.cancel_jump()
 
-        if self.gauche:
-            self.surf = image_gauche
-        if self.droite:
-            self.surf = image_droite
+        self.joystick()
 
     def joystick(self):
         if pygame.joystick.get_count()>0:
@@ -126,5 +145,5 @@ class Platform(pygame.sprite.Sprite):
         self.surf.fill((255,255,255))
         self.rect = self.surf.get_rect(center = pos)
 
-    def move(self):
+    def update(self):
         pass

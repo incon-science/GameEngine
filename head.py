@@ -24,13 +24,16 @@ FramePerSec = pygame.time.Clock()
  
 screen = pygame.display.set_mode((0, 0),pygame.NOFRAME,32)
 pygame.mouse.set_visible(False) # Hide cursor here
-pygame.display.set_caption("nowhere")
+pygame.display.set_caption("Zeldo")
 infoObject = pygame.display.Info()
 WIDTH = infoObject.current_w
 HEIGHT = infoObject.current_h
 
-image_droite = pygame.image.load("assets/e.png").convert_alpha()
-image_gauche = pygame.image.load("assets/e_inv.png").convert_alpha()
+runSheet = pygame.image.load("assets/_Run.png").convert_alpha()
+runSheet = pygame.transform.scale(runSheet,(1200*2,80*2))
+
+idleSheet = pygame.image.load("assets/_Idle.png").convert_alpha()
+idleSheet = pygame.transform.scale(idleSheet,(1200*2,80*2))
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()
