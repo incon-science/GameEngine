@@ -21,6 +21,8 @@ class Character(CharacterAnimation):
         if pressed_keys[K_RIGHT] or pressed_keys[K_d] :
             self.acc.x = ACC
             self.last_dir = 1
+
+        self.animate()
                  
         self.acc.x += self.vel.x * FRIC
         self.vel += self.acc
@@ -28,8 +30,6 @@ class Character(CharacterAnimation):
              
         self.rect.midbottom = self.pos
 
-        self.animate()
- 
     def jump(self): 
         hits = pygame.sprite.spritecollide(self, platforms, False)
         if hits and not self.jumping:
