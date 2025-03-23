@@ -18,15 +18,14 @@ deadzone = 0.3#for joystick
  
 FramePerSec = pygame.time.Clock()
  
-screen = pygame.display.set_mode((0, 0),pygame.NOFRAME,32)
+screen = pygame.display.set_mode((1920, 1080),pygame.NOFRAME,32)
 pygame.mouse.set_visible(False) # Hide cursor here
 pygame.display.set_caption("GameEngine")
 infoObject = pygame.display.Info()
 WIDTH = infoObject.current_w
 HEIGHT = infoObject.current_h
 
-charSheet = pygame.image.load("assets/AnimationSheet_Character.png").convert_alpha()
-charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*4,charSheet.get_height()*4))
+charSheet = pygame.image.load("assets/sprites/knight.png").convert_alpha()
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()
