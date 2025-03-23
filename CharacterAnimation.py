@@ -25,31 +25,51 @@ class CharacterAnimation(pygame.sprite.Sprite):
         self.current_frame_death = 0 #that keeps track on the current time or current frame since last the index switched. 
 
     def animate(self):
-        if self.acc.x != 0:
+        if self.jumping :
+            self.rollAnimation()
+        elif self.acc.x != 0:
             self.runAnimation()
         else :
             self.idleAnimation()
 
     def runAnimation(self):
-        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame_run,charSheet.get_height()/9*3,charSheet.get_width()/8,charSheet.get_height()/9))
+        if self.index_frame_run >= 8:
+            self.surf = charSheet.subsurface((charSheet.get_width()/8*(self.index_frame_run-8),charSheet.get_height()/8*3,charSheet.get_width()/8,charSheet.get_height()/8))
+        else :
+            self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame_run,charSheet.get_height()/8*2,charSheet.get_width()/8,charSheet.get_height()/8))
+
         if self.acc.x < 0:
             self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame_run += 1
-        if self.current_frame_run >= 4:
+        if self.current_frame_run >= NB_FRAMES_SWITCH:
             self.current_frame_run = 0
             self.index_frame_run += 1
-            if self.index_frame_run >= 8 :
+            if self.index_frame_run >= 16 :
                 self.index_frame_run = 0  
 
+    def rollAnimation(self):
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame_roll,charSheet.get_height()/8*5,charSheet.get_width()/8,charSheet.get_height()/8))
+
+        if self.acc.x < 0:
+            self.surf = pygame.transform.flip(self.surf, True, False)
+
+        self.current_frame_roll += 1
+        if self.current_frame_roll >= NB_FRAMES_SWITCH:
+            self.current_frame_roll = 0
+            self.index_frame_roll += 1
+            if self.index_frame_roll >= 8 :
+                self.index_frame_roll = 0  
+
     def idleAnimation(self):
-        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame_idle,0,charSheet.get_width()/8,charSheet.get_height()/9))
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame_idle,0,charSheet.get_width()/8,charSheet.get_height()/8))
+
         if self.last_dir < 0 :
             self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame_idle += 1
-        if self.current_frame_idle >= 18:
+        if self.current_frame_idle >= NB_FRAMES_SWITCH:
             self.current_frame_idle = 0
             self.index_frame_idle += 1
-            if self.index_frame_idle >= 2 :
+            if self.index_frame_idle >= 4 :
                 self.index_frame_idle = 0  
