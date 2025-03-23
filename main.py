@@ -4,13 +4,13 @@ from Platform import *
 P1 = Player()
 all_sprites.add(P1)
 
-for i in range(0,50):
+for i in range(0,20):
     PT = Platform((i*16, 50))
     all_sprites.add(PT)
     platforms.add(PT)
 
-for i in range(0,50):
-    PT = Platform((i*16+16*50, 150))
+for i in range(0,10):
+    PT = Platform((i*16+16*22, -50))
     all_sprites.add(PT)
     platforms.add(PT)
 
