@@ -1,4 +1,5 @@
-from classiq import *
+from Player import *
+from Platform import *
 
 P1 = Player()
 all_sprites.add(P1)
