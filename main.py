@@ -9,6 +9,11 @@ for i in range(0,50):
     all_sprites.add(PT)
     platforms.add(PT)
 
+for i in range(0,50):
+    PT = Platform((i*16+16*50, 150))
+    all_sprites.add(PT)
+    platforms.add(PT)
+
 
 while 1:
 

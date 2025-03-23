@@ -5,6 +5,7 @@ class CharacterAnimation(pygame.sprite.Sprite):
         super().__init__()
 
         self.surf = charSheet.subsurface((0,0,charSheet.get_width()/8,charSheet.get_height()/8))
+        self.mask = pygame.mask.from_surface(self.surf)
         self.rect = self.surf.get_rect()
 
         self.last_dir = 0
