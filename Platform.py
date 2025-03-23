@@ -1,10 +1,9 @@
 from head import *
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self,size,pos):
+    def __init__(self,pos):
         super().__init__()
-        self.surf = pygame.Surface(size)
-        self.surf.fill((20,20,20))
+        self.surf = platformSheet.subsurface((0,0,platformSheet.get_width()/4,platformSheet.get_height()/4))
         self.rect = self.surf.get_rect(center = pos)
 
     def move(self):

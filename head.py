@@ -34,6 +34,7 @@ WIDTH = infoObject.current_w
 HEIGHT = infoObject.current_h
 
 charSheet = pygame.image.load("assets/sprites/knight.png").convert_alpha()
+platformSheet = pygame.image.load("assets/sprites/platforms.png").convert_alpha()
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()

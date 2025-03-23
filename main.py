@@ -4,9 +4,10 @@ from Platform import *
 P1 = Player()
 all_sprites.add(P1)
 
-PT01 = Platform((500, 10),(0, 50))
-all_sprites.add(PT01)
-platforms.add(PT01)
+for i in range(0,50):
+    PT = Platform((i*16, 50))
+    all_sprites.add(PT)
+    platforms.add(PT)
 
 
 while 1:
@@ -21,7 +22,7 @@ while 1:
 
 
     #fond noir
-    display_surf.fill((50,50,50))
+    display_surf.fill((90,192,255))
 
     #ajust camera
     camera.x = P1.pos.x - W_SURF/2
