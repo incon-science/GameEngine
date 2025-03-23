@@ -46,8 +46,8 @@ class Character(CharacterAnimation):
         if self.vel.y > 0:    
             collide = pygame.sprite.spritecollide(self, platforms, False, pygame.sprite.collide_mask)
             if collide:
-                if self.pos.y < collide[0].rect.bottom:               
-                    self.pos.y = collide[0].rect.top +1
+                if self.rect.bottom < collide[0].rect.bottom:               
+                    self.pos.y = collide[0].rect.top +4
                     self.vel.y = 0
                     self.jumping = False
 
