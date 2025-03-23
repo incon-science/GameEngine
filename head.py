@@ -21,8 +21,8 @@ FramePerSec = pygame.time.Clock()
 W_SCREEN = 1920
 H_SCREEN = 1080
 screen = pygame.display.set_mode((W_SCREEN, H_SCREEN),pygame.NOFRAME,32)
-W_SURF = 854
-H_SURF = 480
+W_SURF = 640
+H_SURF = 360
 display_surf = pygame.surface.Surface((W_SURF, H_SURF))
 
 pygame.mouse.set_visible(False) # Hide cursor here

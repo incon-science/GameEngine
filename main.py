@@ -31,8 +31,7 @@ while 1:
         entity.move()
         display_surf.blit(entity.surf, (entity.rect.x - camera.x, entity.rect.y - camera.y))
 
-    display_surf = pygame.transform.scale(display_surf, (W_SCREEN, H_SCREEN))
-    screen.blit(display_surf, (0,0))
+    screen.blit(pygame.transform.scale(display_surf, (W_SCREEN, H_SCREEN)), (0,0))
 
     pygame.display.update()
     FramePerSec.tick(FPS)
