@@ -28,7 +28,7 @@ display_surf = pygame.surface.Surface((W_SURF, H_SURF))
 NB_FRAMES_SWITCH = 8
 
 pygame.mouse.set_visible(False) # Hide cursor here
-pygame.display.set_caption("GameEngine")
+pygame.display.set_caption("PythonCraft")
 infoObject = pygame.display.Info()
 WIDTH = infoObject.current_w
 HEIGHT = infoObject.current_h
