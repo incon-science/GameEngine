@@ -25,9 +25,12 @@ while 1:
     if (P1.rect.y - camera.y) > H_SURF*0.5:
         P1.respawn()
 
-
-    #fond noir
-    display_surf.fill((90,192,255))
+    if P1.editMode:
+        display_surf.fill((0,0,0))
+        pygame.mouse.set_visible(True) # Show cursor here
+    else :
+        display_surf.fill((90,192,255))
+        pygame.mouse.set_visible(False) # Hide cursor here
 
     #ajust camera
     camera.x = P1.pos.x - W_SURF/2
