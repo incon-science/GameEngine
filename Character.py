@@ -104,42 +104,5 @@ class Character(pygame.sprite.Sprite):
             if self.index_frame >= 2 :
                 self.index_frame = 0  
 
-class Player(Character):
-    def __init__(self):
-        super().__init__()  
-
-    def controls(self,event):
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.KEYDOWN:  
-            if event.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
-            if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
-                self.jump()
-        if event.type == pygame.KEYUP:   
-            if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
-                self.cancel_jump()
- 
-class Platform(pygame.sprite.Sprite):
-    def __init__(self,size,pos):
-        super().__init__()
-        self.surf = pygame.Surface(size)
-        self.surf.fill((20,20,20))
-        self.rect = self.surf.get_rect(center = pos)
-
-    def move(self):
-        pass
 
 
-class Text(pygame.sprite.Sprite):
-    def __init__(self,txt,color,size,pos, font = 'Lucida Console'):
-        super().__init__()  
-
-        my_font = pygame.font.SysFont(font, size)
-        self.surf = my_font.render(txt, True, color)
-        self.rect = self.surf.get_rect(center = pos)
-
-    def display(self,surf):
-        surf.blit(self.surf, self.rect)
