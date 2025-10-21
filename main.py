@@ -1,47 +1,45 @@
-from Player import *
-from Platform import *
+from classiq import *
 
 P1 = Player()
 all_sprites.add(P1)
 
-for i in range(0,20):
-    PT = Platform((i*16, 50))
-    all_sprites.add(PT)
-    platforms.add(PT)
-
-for i in range(0,10):
-    PT = Platform((i*16+16*22, -50))
-    all_sprites.add(PT)
-    platforms.add(PT)
-
+PT01 = Platform((1500, 50),(0, 300))
+all_sprites.add(PT01)
+platforms.add(PT01)
 
 while 1:
 
+    if (P1.rect.y - camera.y) > HEIGHT*0.5:
+        P1.respawn()
+
     P1.checkCollisions()
+
 
     for event in pygame.event.get():
         P1.controls(event)
 
-    if (P1.rect.y - camera.y) > H_SURF*0.5:
-        P1.respawn()
+    #fond noir
+    display_surf.fill((50,50,50))
 
-    if P1.editMode:
-        display_surf.fill((0,0,0))
-        pygame.mouse.set_visible(True) # Show cursor here
-    else :
-        display_surf.fill((90,192,255))
-        pygame.mouse.set_visible(False) # Hide cursor here
+
 
     #ajust camera
-    camera.x = P1.pos.x - W_SURF/2
-    camera.y = P1.pos.y - H_SURF/2
+    camera.x = P1.pos.x - WIDTH/2
+    camera.y = P1.pos.y - HEIGHT/2
+    
 
     #deplacer les sprites 
     for entity in all_sprites:
         entity.move()
         display_surf.blit(entity.surf, (entity.rect.x - camera.x, entity.rect.y - camera.y))
 
+
+    #resize and blit surf on screen
     screen.blit(pygame.transform.scale(display_surf, (W_SCREEN, H_SCREEN)), (0,0))
+
+    #show fps
+    show_fps = Text(str(int(FramePerSec.get_fps())),(255,255,255),20,(20,15))
+    show_fps.display(screen)
 
     pygame.display.update()
     FramePerSec.tick(FPS)
