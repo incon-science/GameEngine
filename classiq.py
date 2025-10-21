@@ -3,7 +3,7 @@ from head import *
 class Character(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
-        self.surf = charSheet.subsurface((0,0,charSheet.get_width()/8,charSheet.get_height()/9))
+        self.surf = charSheet.subsurface((0,0,charSheet.get_width()/8,charSheet.get_height()/6))
         self.rect = self.surf.get_rect()
    
         self.pos = vec((0, 0))
@@ -93,12 +93,12 @@ class Character(pygame.sprite.Sprite):
                 self.index_frame = 0  
 
     def idleAnimation(self):
-        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/9))
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/6))
         if self.last_dir < 0 :
             self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame += 1
-        if self.current_frame >= 18:
+        if self.current_frame >= 12:
             self.current_frame = 0
             self.index_frame += 1
             if self.index_frame >= 2 :

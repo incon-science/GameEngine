@@ -16,7 +16,7 @@ FramePerSec = pygame.time.Clock()
 pygame.mouse.set_visible(False)
 pygame.display.set_caption("GameEngine") 
 
-screen = pygame.display.set_mode((1920, 1080),pygame.NOFRAME,32) #mettre 0,0 pour plein ecran
+screen = pygame.display.set_mode((1920, 1080)) #mettre 0,0 pour plein ecran #,pygame.NOFRAME,32
 
 infoObject = pygame.display.Info()
 
