@@ -71,7 +71,7 @@ class Character(pygame.sprite.Sprite):
             self.idleAnimation()
 
     def jumpAnimation(self):
-        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/9*5,charSheet.get_width()/8,charSheet.get_height()/9))
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/9*3,charSheet.get_width()/8,charSheet.get_height()/6))
 
         self.current_frame += 1
         if self.current_frame >= 12:
