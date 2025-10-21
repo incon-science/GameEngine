@@ -121,26 +121,6 @@ class Player(Character):
         if event.type == pygame.KEYUP:   
             if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
                 self.cancel_jump()
-
-        '''
-        if event.type == pygame.JOYBUTTONDOWN:      
-            if  event.button == 0:
-                self.jump()
-        if event.type == pygame.JOYBUTTONUP:      
-            if  event.button == 0:
-                self.cancel_jump()
-
-        if pygame.joystick.get_count()>0:
-            axis_pos = joysticks[0].get_axis(0)
-
-            if axis_pos < -1 * deadzone:
-                self.vel.x = -VEL
-                self.last_dir = -1
-            elif axis_pos > deadzone:
-                self.vel.x = VEL
-                self.last_dir = 1
-            else:
-                self.vel.x = 0      '''  
  
 class Platform(pygame.sprite.Sprite):
     def __init__(self,size,pos):
