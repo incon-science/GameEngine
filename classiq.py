@@ -74,22 +74,22 @@ class Character(pygame.sprite.Sprite):
         self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/9*5,charSheet.get_width()/8,charSheet.get_height()/9))
 
         self.current_frame += 1
-        if self.current_frame >= 6:
+        if self.current_frame >= 12:
             self.current_frame = 0
             self.index_frame += 1
             if self.index_frame >= 8 :
                 self.index_frame = 0  
 
     def runAnimation(self):
-        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/9*3,charSheet.get_width()/8,charSheet.get_height()/9))
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*4+charSheet.get_width()/8*self.index_frame,charSheet.get_height()/6*1,charSheet.get_width()/8,charSheet.get_height()/6))
         if self.acc.x < 0:
             self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame += 1
-        if self.current_frame >= 4:
+        if self.current_frame >= 12:
             self.current_frame = 0
             self.index_frame += 1
-            if self.index_frame >= 8 :
+            if self.index_frame >= 4 :
                 self.index_frame = 0  
 
     def idleAnimation(self):
