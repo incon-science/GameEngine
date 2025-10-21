@@ -67,7 +67,7 @@ class Character(pygame.sprite.Sprite):
     def animate(self):
         if self.jumping :
             self.jumpAnimation()
-        elif self.acc.x != 0:
+        elif self.vel.x != 0:
             self.runAnimation()
         else :
             self.idleAnimation()
