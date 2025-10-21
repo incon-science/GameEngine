@@ -3,7 +3,7 @@ from classiq import *
 P1 = Player()
 all_sprites.add(P1)
 
-PT01 = Platform((100, 20),(0, 300))
+PT01 = Platform((1000, 20),(0, 300))
 all_sprites.add(PT01)
 platforms.add(PT01)
 
