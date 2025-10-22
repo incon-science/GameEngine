@@ -23,13 +23,13 @@ infoObject = pygame.display.Info()
 W_SCREEN = infoObject.current_w
 H_SCREEN = infoObject.current_h
 
-WIDTH = 1280
-HEIGHT = 720
+WIDTH = 1280/2
+HEIGHT = 720/2
 
 display_surf = pygame.Surface((WIDTH, HEIGHT))
 
 charSheet = pygame.image.load("assets/AnimationSheet.png").convert_alpha()
-charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*4,charSheet.get_height()*4))
+#charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*4,charSheet.get_height()*4))
 
 all_sprites = pygame.sprite.Group()
 platforms = pygame.sprite.Group()
