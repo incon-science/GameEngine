@@ -6,9 +6,10 @@ from Player import *
 P1 = Player()
 all_sprites.add(P1)
 
-PT01 = Platform((100000, 20),(0, 300))
-all_sprites.add(PT01)
-platforms.add(PT01)
+for i in range(-10,50):
+    PT = Platform((16*10, 16),(i*16*12,200))
+    all_sprites.add(PT)
+    platforms.add(PT)
 
 while 1:
 
