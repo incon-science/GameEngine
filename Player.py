@@ -12,9 +12,9 @@ class Player(Character):
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-            if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
+            if event.key == pygame.K_SPACE:
                 self.jump()
         if event.type == pygame.KEYUP:   
-            if event.key == pygame.K_SPACE or event.key == pygame.K_z or event.key == pygame.K_UP:
+            if event.key == pygame.K_SPACE:
                 self.cancel_jump()
  

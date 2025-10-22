@@ -17,12 +17,16 @@ class Character(CharacterAnimation):
     
         pressed_keys = pygame.key.get_pressed()
                 
-        if pressed_keys[K_LEFT] or pressed_keys[K_q] :
+        if pressed_keys[K_q] :
             self.acc.x = -ACC
-            self.last_dir = -1
-        if pressed_keys[K_RIGHT] or pressed_keys[K_d] :
+            self.moved_left = True
+            self.no_move = False
+        elif pressed_keys[K_d] :
             self.acc.x = ACC
-            self.last_dir = 1
+            self.moved_left = False
+            self.no_move = False
+        else : 
+            self.no_move = True
                  
         self.acc.x += self.vel.x * FRIC
         self.vel += self.acc
