@@ -6,10 +6,11 @@ from Player import *
 P1 = Player()
 all_sprites.add(P1)
 
-for i in range(-10,50):
-    PT = Platform((16*10, 16),(i*16*12,200))
-    all_sprites.add(PT)
-    platforms.add(PT)
+for i in range(-10,10):
+    for j in range(-10,10):
+        PT = Platform((16*10, 16),(i*j*16*12,j*16*5))
+        all_sprites.add(PT)
+        platforms.add(PT)
 
 while 1:
 
@@ -27,8 +28,8 @@ while 1:
     display_surf.fill((50,50,50))
 
     #ajust camera
-    #camera.x = P1.pos.x - WIDTH/2
-    #camera.y = P1.pos.y - HEIGHT/2
+    camera.x = P1.pos.x - WIDTH/2
+    camera.y = P1.pos.y - HEIGHT/2
     
     #deplacer les sprites 
     for entity in all_sprites:
