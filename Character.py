@@ -37,7 +37,6 @@ class Character(CharacterAnimation):
         if hits and not self.jumping:
            self.jumping = True
            self.vel.y = -15
-           self.index_frame = 0
  
     def cancel_jump(self):
         if self.jumping:

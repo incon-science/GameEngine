@@ -39,7 +39,9 @@ class CharacterAnimation(pygame.sprite.Sprite):
 
     def jumpAnimation(self):
         self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/6*3,charSheet.get_width()/8,charSheet.get_height()/6))
-
+        if self.last_dir < 0 :
+                    self.surf = pygame.transform.flip(self.surf, True, False)
+                    
         self.current_frame += 1
         if self.current_frame >= 12:
             self.current_frame = 0
