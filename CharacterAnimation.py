@@ -17,25 +17,23 @@ class CharacterAnimation(pygame.sprite.Sprite):
         self.current_frame = 0
 
     def animate(self):
+        animation = ""
         if self.jumping :
-            if self.current_animation != "jump":
-                self.resetAnimationFrame()
-            self.current_animation = "jump"
-
-            self.jumpAnimation()
-
+            animation = "jump"
         elif not self.no_move :
-            if self.current_animation != "run":
-                self.resetAnimationFrame()
-            self.current_animation = "run"
-
-            self.runAnimation()
-
+            animation = "run"
         else :
-            if self.current_animation != "idle":
-                self.resetAnimationFrame()
-            self.current_animation = "idle"
+            animation = "idle"
 
+        if self.current_animation != animation :
+            self.resetAnimationFrame()
+        self.current_animation = animation
+
+        if self.current_animation == "jump" :
+            self.jumpAnimation()
+        elif self.current_animation == "run" :
+            self.runAnimation()
+        elif self.current_animation == "idle" :
             self.idleAnimation()
 
     def jumpAnimation(self):
