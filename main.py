@@ -3,6 +3,25 @@ from Platform import *
 from Text import *
 from Player import *
 
+
+def updateCameraCenterSmooth(player,camera):
+        camera_aim = vec(player.pos.x - WIDTH/2,player.pos.y - HEIGHT/2)
+
+        camera_aim.x = round(camera_aim.x)
+        camera_aim.y = round(camera_aim.y)
+
+        if camera_aim.x > camera.x :
+            camera.x += 1
+        if camera_aim.x < camera.x :
+            camera.x -= 1
+        if camera_aim.y > camera.y :
+            camera.y += 1
+        if camera_aim.y < camera.y :
+            camera.y -= 1
+
+        return camera
+
+
 P1 = Player()
 all_sprites.add(P1)
 
@@ -14,28 +33,21 @@ for i in range(-10,10):
 
 while 1:
 
-    if (P1.rect.y - camera.y) > HEIGHT*0.5:
-        P1.respawn()
-
     P1.checkCollisions()
-
 
     for event in pygame.event.get():
         P1.controls(event)
-
 
     #fond noir
     display_surf.fill((50,50,50))
 
     #ajust camera
-    camera.x = P1.pos.x - WIDTH/2
-    camera.y = P1.pos.y - HEIGHT/2
+    camera = updateCameraCenterSmooth(P1,camera)
     
     #deplacer les sprites 
     for entity in all_sprites:
         entity.move()
         display_surf.blit(entity.surf, (entity.rect.x - camera.x, entity.rect.y - camera.y))
-
 
     #resize and blit surf on screen
     screen.blit(pygame.transform.scale(display_surf, (W_SCREEN, H_SCREEN)), (0,0))
