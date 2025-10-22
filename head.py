@@ -4,7 +4,6 @@ import sys
 
 pygame.init()
 
-camera = pygame.math.Vector2((0, 0))
 vec = pygame.math.Vector2 #2 for two dimensional
 
 ACC = 0.5
@@ -27,6 +26,8 @@ WIDTH = 1280/2
 HEIGHT = 720/2
 
 display_surf = pygame.Surface((WIDTH, HEIGHT))
+
+camera = pygame.math.Vector2((0, 0))
 
 charSheet = pygame.image.load("assets/AnimationSheet.png").convert_alpha()
 #charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*4,charSheet.get_height()*4))

@@ -27,8 +27,8 @@ while 1:
     display_surf.fill((50,50,50))
 
     #ajust camera
-    camera.x = P1.pos.x - WIDTH/2
-    camera.y = P1.pos.y - HEIGHT/2
+    #camera.x = P1.pos.x - WIDTH/2
+    #camera.y = P1.pos.y - HEIGHT/2
     
     #deplacer les sprites 
     for entity in all_sprites:

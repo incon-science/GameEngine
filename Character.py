@@ -36,7 +36,7 @@ class Character(CharacterAnimation):
         hits = pygame.sprite.spritecollide(self, platforms, False)
         if hits and not self.jumping:
            self.jumping = True
-           self.vel.y = -15
+           self.vel.y = -10
  
     def cancel_jump(self):
         if self.jumping:
