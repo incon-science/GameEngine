@@ -22,8 +22,8 @@ infoObject = pygame.display.Info()
 W_SCREEN = infoObject.current_w
 H_SCREEN = infoObject.current_h
 
-WIDTH = 1280/2
-HEIGHT = 720/2
+WIDTH = round(1280/3)
+HEIGHT =  round(720/3)
 
 display_surf = pygame.Surface((WIDTH, HEIGHT))
 
