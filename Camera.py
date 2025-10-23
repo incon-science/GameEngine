@@ -10,10 +10,10 @@ class Camera():
     def update(self,player):
         self.pos_aim = vec(player.pos.x - WIDTH/2,player.pos.y - HEIGHT/2)
         
-        if player.moved_left :
+        """if player.moved_left :
             self.pos_aim.x -= WIDTH/20
         else :
-            self.pos_aim.x += WIDTH/20
+            self.pos_aim.x += WIDTH/20"""
 
         self.updateCameraCenterSmooth()
 
@@ -29,10 +29,10 @@ class Camera():
     def calculOffsetX(self,diff_x):
 
         X = [-WIDTH/2, 0, WIDTH/2] # random x values
-        Y = [-40, 0, 40] # random y values
+        Y = [-10, 0, 10] # random y values
 
         # Finding the interpolation
-        y_interp = interp1d(X, Y)
+        y_interp = interp1d(X, Y, kind='slinear')
 
         rez = y_interp(diff_x)
 
@@ -41,10 +41,10 @@ class Camera():
     def calculOffsetY(self,diff_y):
 
         X = [-HEIGHT/2, 0, HEIGHT/2] # random x values
-        Y = [-40, 0, 40] # random y values
+        Y = [-10, 0, 10] # random y values
 
         # Finding the interpolation
-        y_interp = interp1d(X, Y)
+        y_interp = interp1d(X, Y, kind='slinear')
 
         rez = y_interp(diff_y)
 
