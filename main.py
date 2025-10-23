@@ -3,7 +3,6 @@ from Platform import *
 from Text import *
 from Player import *
 
-
 def updateCameraCenterSmooth(player,camera):
         camera_aim = vec(player.pos.x - WIDTH/2,player.pos.y - HEIGHT/2)
 
@@ -30,6 +29,9 @@ for i in range(-10,10):
         PT = Platform((16*10, 16),(i*j*16*12,j*16*5))
         all_sprites.add(PT)
         platforms.add(PT)
+PT = Platform((20000, 200),(0,300))
+all_sprites.add(PT)
+platforms.add(PT)
 
 while 1:
 
