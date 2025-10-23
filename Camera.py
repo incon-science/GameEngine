@@ -22,7 +22,7 @@ class Camera():
 
     def calculOffsetX(self,diff_x):
 
-        X = [-WIDTH/2,          -WIDTH/10,          0,          WIDTH/10,           WIDTH/2] # random x values
+        X = [-WIDTH/2,          -WIDTH/20,          0,          WIDTH/20,           WIDTH/2] # random x values
         Y = [-100,              -1,                 0,          1,                  100] # random y values
 
         # Finding the interpolation
@@ -34,7 +34,7 @@ class Camera():
 
     def calculOffsetY(self,diff_y):
 
-        X = [-HEIGHT/2,          -HEIGHT/10,          0,          HEIGHT/10,           HEIGHT/2] # random x values
+        X = [-HEIGHT/2,          -HEIGHT/20,          0,          HEIGHT/20,           HEIGHT/2] # random x values
         Y = [-100,              -1,                 0,          1,                  100] # random y values
 
         # Finding the interpolation
