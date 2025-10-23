@@ -27,8 +27,6 @@ HEIGHT = 720/2
 
 display_surf = pygame.Surface((WIDTH, HEIGHT))
 
-camera = pygame.math.Vector2((-WIDTH/2, -HEIGHT/2))
-
 charSheet = pygame.image.load("assets/AnimationSheet.png").convert_alpha()
 #charSheet = pygame.transform.scale(charSheet,(charSheet.get_width()*4,charSheet.get_height()*4))
 
