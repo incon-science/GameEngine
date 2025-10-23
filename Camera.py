@@ -12,27 +12,15 @@ class Camera():
         self.updateCameraCenterSmooth()
 
     def updateCameraCenterSmooth(self):
-
-        """
-        if self.pos_aim.x > self.pos.x :
-            self.pos.x += 1
-        if self.pos_aim.x < self.pos.x :
-            self.pos.x -= 1
-        if self.pos_aim.y > self.pos.y :
-            self.pos.y += 1
-        if self.pos_aim.y < self.pos.y :
-            self.pos.y -= 1
-        """
-
-        print(self.pos_aim.x-self.pos.x) # -WIDTH/2 à WIDTH/2
         dif_x = self.pos_aim.x - self.pos.x
+        offset_x = self.calculOffsetX(dif_x)
+        self.pos.x += offset_x
 
-        offset = self.calculOffset(dif_x)
+        dif_y = self.pos_aim.y - self.pos.y
+        offset_y = self.calculOffsetY(dif_y)
+        self.pos.y += offset_y
 
-        self.pos.x += offset
-
-
-    def calculOffset(self,diff_x):
+    def calculOffsetX(self,diff_x):
 
         X = [-WIDTH/2,          -WIDTH/10,          0,          WIDTH/10,           WIDTH/2] # random x values
         Y = [-100,              -1,                 0,          1,                  100] # random y values
@@ -41,5 +29,17 @@ class Camera():
         y_interp = interp1d(X, Y)
 
         rez = y_interp(diff_x)
+
+        return math.floor(rez)
+
+    def calculOffsetY(self,diff_y):
+
+        X = [-HEIGHT/2,          -HEIGHT/10,          0,          HEIGHT/10,           HEIGHT/2] # random x values
+        Y = [-100,              -1,                 0,          1,                  100] # random y values
+
+        # Finding the interpolation
+        y_interp = interp1d(X, Y)
+
+        rez = y_interp(diff_y)
 
         return math.floor(rez)
