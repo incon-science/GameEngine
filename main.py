@@ -35,7 +35,7 @@ while 1:
     #deplacer les sprites 
     for entity in all_sprites:
         entity.move()
-        display_surf.blit(entity.surf, (entity.rect.x - camera.camera.x, entity.rect.y - camera.camera.y))
+        display_surf.blit(entity.surf, (entity.rect.x - camera.pos.x, entity.rect.y - camera.pos.y))
 
     #resize and blit surf on screen
     screen.blit(pygame.transform.scale(display_surf, (W_SCREEN, H_SCREEN)), (0,0))
