@@ -9,11 +9,6 @@ class Camera():
 
     def update(self,player):
         self.pos_aim = vec(player.pos.x - WIDTH/2,player.pos.y - HEIGHT/2)
-        
-        """if player.moved_left :
-            self.pos_aim.x -= WIDTH/20
-        else :
-            self.pos_aim.x += WIDTH/20"""
 
         self.updateCameraCenterSmooth()
 

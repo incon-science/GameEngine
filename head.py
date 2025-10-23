@@ -15,15 +15,15 @@ FramePerSec = pygame.time.Clock()
 pygame.mouse.set_visible(False)
 pygame.display.set_caption("GameEngine") 
 
-screen = pygame.display.set_mode((1280, 720)) #mettre 0,0 pour plein ecran #,pygame.NOFRAME,32
+screen = pygame.display.set_mode((1920, 1080)) #mettre 0,0 pour plein ecran #,pygame.NOFRAME,32
 
 infoObject = pygame.display.Info()
 
 W_SCREEN = infoObject.current_w
 H_SCREEN = infoObject.current_h
 
-WIDTH = round(1280/3)
-HEIGHT =  round(720/3)
+WIDTH = round(1280/2)
+HEIGHT =  round(720/2)
 
 display_surf = pygame.Surface((WIDTH, HEIGHT))
 
