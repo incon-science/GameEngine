@@ -44,7 +44,6 @@ class Camera():
 
         x = diff_x / (WIDTH/2) * 4
 
-        print(x)
         rez = x*x*x
 
         return int(rez)
