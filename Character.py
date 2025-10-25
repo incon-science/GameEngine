@@ -10,12 +10,25 @@ class Character(CharacterAnimation):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.jumping = False
+        self.running = False
 
 
     def move(self):
         self.acc = vec(0,0.5)
     
         pressed_keys = pygame.key.get_pressed()
+
+        if pressed_keys[K_LSHIFT] :
+            self.running = True
+        else :
+            self.running = False
+
+        if self.running :
+            ACC = 0.5
+            FRIC = -0.12
+        else :
+            ACC = 0.3
+            FRIC = -0.1
                 
         if pressed_keys[K_q] :
             self.acc.x = -ACC
@@ -40,7 +53,7 @@ class Character(CharacterAnimation):
         hits = pygame.sprite.spritecollide(self, platforms, False)
         if hits and not self.jumping:
            self.jumping = True
-           self.vel.y = -10
+           self.vel.y = -8
  
     def cancel_jump(self):
         if self.jumping:

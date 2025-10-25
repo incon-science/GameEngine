@@ -7,7 +7,7 @@ class Camera():
         self.pos = vec(round(-WIDTH/2),round(-HEIGHT/2))
         self.pos_aim = self.pos
 
-        self.offset_moving = 150
+        self.offset_moving = 100
 
     def update(self,player):
         self.pos_aim = vec(player.pos.x - WIDTH/2,player.pos.y - HEIGHT/2)
@@ -21,17 +21,17 @@ class Camera():
 
     def updateCameraCenterSmooth(self):
         dif_x = self.pos_aim.x - self.pos.x
-        offset_x = self.calculOffsetX(dif_x)
+        offset_x = self.calculOffsetXCubique(dif_x)
         self.pos.x += offset_x
 
         dif_y = self.pos_aim.y - self.pos.y
-        offset_y = self.calculOffsetY(dif_y)
+        offset_y = self.calculOffsetYCubique(dif_y)
         self.pos.y += offset_y
 
-    def calculOffsetXd(self,diff_x):
+    def calculOffsetX(self,diff_x):
 
-        X = [-WIDTH/2, -self.offset_moving,self.offset_moving, WIDTH/2] # random x values
-        Y = [-25, 0,0, 25] # random y values
+        X = [-WIDTH/2, -self.offset_moving,0,self.offset_moving, WIDTH/2] # random x values
+        Y = [-100, -1,0,1, 100] # random y values
 
         # Finding the interpolation
         y_interp = interp1d(X, Y, kind='slinear')
@@ -40,11 +40,17 @@ class Camera():
 
         return math.floor(rez)
 
-    def calculOffsetX(self,diff_x):
+    def calculOffsetXCubique(self,diff_x):
 
-        x = diff_x / (WIDTH/2) * 4
-
+        x = diff_x / (WIDTH/2) *4
         rez = x*x*x
+
+        return int(rez)
+
+    def calculOffsetYCubique(self,diff_y):
+
+        y = diff_y / (HEIGHT/2) *4
+        rez = y*y*y
 
         return int(rez)
 

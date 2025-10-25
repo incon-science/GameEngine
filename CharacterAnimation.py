@@ -21,7 +21,10 @@ class CharacterAnimation(pygame.sprite.Sprite):
         if self.jumping :
             animation = "jump"
         elif not self.no_move :
-            animation = "run"
+            if self.running :
+                animation = "run"
+            else :
+                animation = "walk"
         else :
             animation = "idle"
 
@@ -33,6 +36,8 @@ class CharacterAnimation(pygame.sprite.Sprite):
             self.jumpAnimation()
         elif self.current_animation == "run" :
             self.runAnimation()
+        elif self.current_animation == "walk" :
+            self.walkAnimation()
         elif self.current_animation == "idle" :
             self.idleAnimation()
 
@@ -60,8 +65,32 @@ class CharacterAnimation(pygame.sprite.Sprite):
             if self.index_frame >= 4 :
                 self.index_frame = 0  
 
+    def walkAnimation(self):
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,charSheet.get_height()/6*1,charSheet.get_width()/8,charSheet.get_height()/6))
+        if self.moved_left :
+            self.surf = pygame.transform.flip(self.surf, True, False)
+
+        self.current_frame += 1
+        if self.current_frame >= 12:
+            self.current_frame = 0
+            self.index_frame += 1
+            if self.index_frame >= 4 :
+                self.index_frame = 0  
+
     def idleAnimation(self):
         self.surf = charSheet.subsurface((charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/6))
+        if self.moved_left :
+            self.surf = pygame.transform.flip(self.surf, True, False)
+
+        self.current_frame += 1
+        if self.current_frame >= 12:
+            self.current_frame = 0
+            self.index_frame += 1
+            if self.index_frame >= 2 :
+                self.index_frame = 0  
+
+    def attackAnimation(self):
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*4+charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/6))
         if self.moved_left :
             self.surf = pygame.transform.flip(self.surf, True, False)
 
