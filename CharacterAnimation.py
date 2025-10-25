@@ -18,7 +18,9 @@ class CharacterAnimation(pygame.sprite.Sprite):
 
     def animate(self):
         animation = ""
-        if self.jumping :
+        if self.attacking :
+            animation = "attack"
+        elif self.jumping :
             animation = "jump"
         elif not self.no_move :
             if self.running :
@@ -32,7 +34,9 @@ class CharacterAnimation(pygame.sprite.Sprite):
             self.resetAnimationFrame()
         self.current_animation = animation
 
-        if self.current_animation == "jump" :
+        if self.current_animation == "attack" :
+            self.attackAnimation()        
+        elif self.current_animation == "jump" :
             self.jumpAnimation()
         elif self.current_animation == "run" :
             self.runAnimation()
@@ -90,7 +94,7 @@ class CharacterAnimation(pygame.sprite.Sprite):
                 self.index_frame = 0  
 
     def attackAnimation(self):
-        self.surf = charSheet.subsurface((charSheet.get_width()/8*4+charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/6))
+        self.surf = charSheet.subsurface((charSheet.get_width()/8*2+charSheet.get_width()/8*self.index_frame,0,charSheet.get_width()/8,charSheet.get_height()/6))
         if self.moved_left :
             self.surf = pygame.transform.flip(self.surf, True, False)
 

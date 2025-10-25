@@ -9,14 +9,21 @@ class Character(CharacterAnimation):
         self.pos = vec((0, 0))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
+
         self.jumping = False
         self.running = False
+        self.attacking = False
 
 
     def move(self):
         self.acc = vec(0,0.5)
     
         pressed_keys = pygame.key.get_pressed()
+
+        if pygame.mouse.get_pressed()[0] :
+            self.attacking = True
+        else :
+            self.attacking = False
 
         if pressed_keys[K_LSHIFT] :
             self.running = True
