@@ -12,8 +12,9 @@ class Character(CharacterAnimation):
 
         self.jumping = False
         self.running = False
-        self.attacking = False
 
+        self.attacking = False
+        self.stopattacking = True
 
     def move(self):
         self.acc = vec(0,0.5)

@@ -28,18 +28,6 @@ class Camera():
         offset_y = self.calculOffsetYCubique(dif_y)
         self.pos.y += offset_y
 
-    def calculOffsetX(self,diff_x):
-
-        X = [-WIDTH/2, -self.offset_moving,0,self.offset_moving, WIDTH/2] # random x values
-        Y = [-100, -1,0,1, 100] # random y values
-
-        # Finding the interpolation
-        y_interp = interp1d(X, Y, kind='slinear')
-
-        rez = y_interp(diff_x)
-
-        return math.floor(rez)
-
     def calculOffsetXCubique(self,diff_x):
 
         x = diff_x / (WIDTH/2) *4
@@ -53,6 +41,18 @@ class Camera():
         rez = y*y*y
 
         return int(rez)
+
+    def calculOffsetX(self,diff_x):
+
+        X = [-WIDTH/2, -self.offset_moving,0,self.offset_moving, WIDTH/2] # random x values
+        Y = [-100, -1,0,1, 100] # random y values
+
+        # Finding the interpolation
+        y_interp = interp1d(X, Y, kind='slinear')
+
+        rez = y_interp(diff_x)
+
+        return math.floor(rez)
 
     def calculOffsetY(self,diff_y):
 

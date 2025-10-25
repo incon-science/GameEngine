@@ -18,7 +18,7 @@ class CharacterAnimation(pygame.sprite.Sprite):
 
     def animate(self):
         animation = ""
-        if self.attacking :
+        if self.attacking:
             animation = "attack"
         elif self.jumping :
             animation = "jump"
@@ -104,7 +104,7 @@ class CharacterAnimation(pygame.sprite.Sprite):
             self.index_frame += 1
             if self.index_frame >= 2 :
                 self.index_frame = 0  
-                
+                self.attacking = False
 
 
 
