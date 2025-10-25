@@ -99,7 +99,7 @@ class CharacterAnimation(pygame.sprite.Sprite):
             self.surf = pygame.transform.flip(self.surf, True, False)
 
         self.current_frame += 1
-        if self.current_frame >= 12:
+        if self.current_frame >= 8:
             self.current_frame = 0
             self.index_frame += 1
             if self.index_frame >= 2 :

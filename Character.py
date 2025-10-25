@@ -25,8 +25,8 @@ class Character(CharacterAnimation):
             ACC = 0.5
             FRIC = -0.12
         else :
-            ACC = 0.3
-            FRIC = -0.1
+            ACC = 0.25
+            FRIC = -0.12
         
         if not self.no_move :
             if self.moved_left :
