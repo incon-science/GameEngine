@@ -104,6 +104,7 @@ class CharacterAnimation(pygame.sprite.Sprite):
             self.index_frame += 1
             if self.index_frame >= 2 :
                 self.index_frame = 0  
+                
 
 
 
