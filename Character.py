@@ -18,17 +18,7 @@ class Character(CharacterAnimation):
     def move(self):
         self.acc = vec(0,0.5)
     
-        pressed_keys = pygame.key.get_pressed()
-
-        if pygame.mouse.get_pressed()[0] :
-            self.attacking = True
-        else :
-            self.attacking = False
-
-        if pressed_keys[K_LSHIFT] :
-            self.running = True
-        else :
-            self.running = False
+        self.movements()
 
         if self.running :
             ACC = 0.5
@@ -36,17 +26,12 @@ class Character(CharacterAnimation):
         else :
             ACC = 0.3
             FRIC = -0.1
-                
-        if pressed_keys[K_q] :
-            self.acc.x = -ACC
-            self.moved_left = True
-            self.no_move = False
-        elif pressed_keys[K_d] :
-            self.acc.x = ACC
-            self.moved_left = False
-            self.no_move = False
-        else : 
-            self.no_move = True
+        
+        if not self.no_move :
+            if self.moved_left :
+                self.acc.x = -ACC
+            else :
+                self.acc.x = ACC
                  
         self.acc.x += self.vel.x * FRIC
         self.vel += self.acc

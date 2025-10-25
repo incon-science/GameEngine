@@ -17,4 +17,25 @@ class Player(Character):
         if event.type == pygame.KEYUP:   
             if event.key == pygame.K_SPACE:
                 self.cancel_jump()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self.attacking = True
+        else:
+            self.attacking = False
+
+    def movements(self):
+        pressed_keys = pygame.key.get_pressed()
+
+        if pressed_keys[K_LSHIFT] :
+            self.running = True
+        else :
+            self.running = False
+                
+        if pressed_keys[K_q] :
+            self.moved_left = True
+            self.no_move = False
+        elif pressed_keys[K_d] :
+            self.moved_left = False
+            self.no_move = False
+        else : 
+            self.no_move = True
  
